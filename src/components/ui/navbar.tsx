@@ -48,11 +48,6 @@ export function Navbar() {
 
         {/* Network & Portal Action */}
         <div className="hidden sm:flex items-center space-x-3">
-          <Badge variant="blockchain" className="flex items-center space-x-1 px-2.5 py-1">
-            <div className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
-            <span>Arbitrum Sepolia</span>
-          </Badge>
-
           <Link href="/dashboard">
             <Button size="sm" className="space-x-1">
               <span>Portal Login</span>
