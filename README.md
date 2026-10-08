@@ -73,6 +73,8 @@ flowchart TD
     end
 ```
 
+> 📖 **Deep Dive:** For the complete 10-component breakdown, trust boundary specifications, on-chain vs. off-chain matrix, and threat modeling, see the dedicated [System Architecture Specification](docs/ARCHITECTURE.md).
+
 ---
 
 ## ✨ Key Features
