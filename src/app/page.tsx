@@ -18,6 +18,11 @@ export default function HomePage() {
       <section className="relative overflow-hidden border-b border-stone-200/80 bg-gradient-to-b from-amber-50/50 via-white to-[#FBFBF9] py-20 sm:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center max-w-3xl mx-auto space-y-6">
+            <div className="inline-flex items-center space-x-2 rounded-full bg-amber-100/80 px-4 py-1.5 text-xs font-semibold text-amber-900 border border-amber-200">
+              <span>🍯</span>
+              <span>Arbitrum Sepolia L2 Powered • ₹0 Free Tier Architecture</span>
+            </div>
+
             <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-stone-900 leading-[1.1]">
               Honey Traceability from{" "}
               <span className="bg-gradient-to-r from-amber-600 to-amber-500 bg-clip-text text-transparent">
