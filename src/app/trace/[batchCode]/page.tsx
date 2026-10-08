@@ -23,6 +23,8 @@ interface PageProps {
   params: Promise<{ batchCode: string }>;
 }
 
+export const instant = false;
+
 export async function generateStaticParams() {
   return Object.keys(SAMPLE_BATCHES).map((code) => ({
     batchCode: code,
