@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { QRCodeSVG } from "qrcode.react";
 import { Download, ExternalLink, Printer } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -12,6 +13,15 @@ interface QrCardProps {
 }
 
 export function QrCard({ batchCode, lotNumber, url }: QrCardProps) {
+  const [effectiveUrl, setEffectiveUrl] = useState(url);
+
+  useEffect(() => {
+    // When rendered in browser, always encode the current live domain
+    if (typeof window !== "undefined") {
+      setEffectiveUrl(`${window.location.origin}/trace/${batchCode}`);
+    }
+  }, [batchCode]);
+
   const downloadQr = () => {
     const svg = document.getElementById(`qr-svg-${batchCode}`);
     if (!svg) return;
@@ -45,7 +55,7 @@ export function QrCard({ batchCode, lotNumber, url }: QrCardProps) {
         <div className="p-3 bg-white rounded-2xl border-2 border-amber-300 shadow-sm inline-block">
           <QRCodeSVG
             id={`qr-svg-${batchCode}`}
-            value={url}
+            value={effectiveUrl}
             size={180}
             level="H"
             includeMargin={true}
@@ -84,4 +94,3 @@ export function QrCard({ batchCode, lotNumber, url }: QrCardProps) {
     </Card>
   );
 }
-

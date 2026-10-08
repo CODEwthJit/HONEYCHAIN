@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { QrScannerModal } from "@/components/qr/QrScannerModal";
 
 export default function HomePage() {
   return (
@@ -31,6 +32,8 @@ export default function HomePage() {
 
             {/* Quick Actions */}
             <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+              <QrScannerModal />
+
               <Link href="/trace/HNY-2026-0001">
                 <Button size="lg" className="space-x-2 text-base px-6 h-12 shadow-md">
                   <QrCode className="h-5 w-5" />
