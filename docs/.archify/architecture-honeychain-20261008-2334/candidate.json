@@ -1,0 +1,268 @@
+{
+  "schema_version": 1,
+  "diagram_type": "architecture",
+  "meta": {
+    "title": "HoneyChain — Implemented System Architecture",
+    "output": "docs/.archify/architecture-honeychain-20261008-2334/honeychain-architecture.html",
+    "locale": "en",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "https://github.com/CODEwthJit/HONEYCHAIN.git",
+      "provider": "github",
+      "link_mode": "web",
+      "revision": "8b2ea81d9b738de2a9379e7d7d937c0ee26d20e6"
+    }
+  },
+  "components": [
+    {
+      "id": "user",
+      "type": "external",
+      "label": "Consumer / operator",
+      "sublabel": "Browser user",
+      "pos": [35, 300],
+      "size": [155, 78]
+    },
+    {
+      "id": "web-ui",
+      "type": "frontend",
+      "label": "HoneyChain web UI",
+      "sublabel": "Dashboard • trace • verify",
+      "sources": [
+        { "path": "src/app/layout.tsx", "line": 21, "end_line": 37 },
+        { "path": "src/app/dashboard/page.tsx", "line": 31, "end_line": 31 },
+        { "path": "src/app/trace/[batchCode]/page.tsx", "line": 34, "end_line": 37 }
+      ],
+      "pos": [245, 320],
+      "size": [185, 90]
+    },
+    {
+      "id": "next-routes",
+      "type": "backend",
+      "label": "Next.js routes + demo data",
+      "sublabel": "Trace render • in-memory samples",
+      "sources": [
+        { "path": "src/app/trace/[batchCode]/page.tsx", "line": 28, "end_line": 38 },
+        { "path": "src/app/dashboard/page.tsx", "line": 31, "end_line": 114 },
+        { "path": "src/lib/data/sampleBatches.ts", "line": 1, "end_line": 39 }
+      ],
+      "pos": [565, 320],
+      "size": [190, 90]
+    },
+    {
+      "id": "qr-crypto",
+      "type": "frontend",
+      "label": "Browser QR + verifier",
+      "sublabel": "Scan route • SHA-256 locally",
+      "sources": [
+        { "path": "src/components/qr/QrCard.tsx", "line": 18, "end_line": 58 },
+        { "path": "src/components/qr/QrScannerModal.tsx", "line": 18, "end_line": 51 },
+        { "path": "src/components/verifier/DocumentVerifier.tsx", "line": 20, "end_line": 44 }
+      ],
+      "pos": [245, 550],
+      "size": [185, 90]
+    },
+    {
+      "id": "supabase-auth",
+      "type": "external",
+      "label": "Supabase Auth",
+      "sublabel": "SSR/browser helpers; not wired",
+      "sources": [
+        { "path": "src/lib/supabase/client.ts", "line": 1, "end_line": 8 },
+        { "path": "src/lib/supabase/server.ts", "line": 1, "end_line": 24 }
+      ],
+      "pos": [245, 120],
+      "size": [190, 90]
+    },
+    {
+      "id": "drizzle-postgres",
+      "type": "database",
+      "label": "Drizzle / PostgreSQL",
+      "sublabel": "Schema + connector; no route queries",
+      "sources": [
+        { "path": "src/db/index.ts", "line": 1, "end_line": 17 },
+        { "path": "src/db/schema.ts", "line": 29, "end_line": 85 },
+        { "path": "drizzle.config.ts", "line": 1, "end_line": 13 }
+      ],
+      "pos": [565, 120],
+      "size": [195, 90]
+    },
+    {
+      "id": "web3-adapter",
+      "type": "backend",
+      "label": "Viem / Wagmi adapter",
+      "sublabel": "RPC + wallet config; UI calls absent",
+      "sources": [
+        { "path": "src/lib/blockchain/client.ts", "line": 1, "end_line": 15 },
+        { "path": "src/lib/blockchain/config.ts", "line": 1, "end_line": 16 }
+      ],
+      "pos": [850, 550],
+      "size": [195, 90]
+    },
+    {
+      "id": "arbitrum",
+      "type": "cloud",
+      "label": "Arbitrum Sepolia",
+      "sublabel": "Chain ID 421614 • JSON-RPC",
+      "sources": [
+        { "path": "src/lib/blockchain/config.ts", "line": 5, "end_line": 14 },
+        { "path": "ponder/ponder.config.ts", "line": 5, "end_line": 18 },
+        { "path": "src/lib/blockchain/deployed/contractAddresses.json", "line": 1, "end_line": 8 }
+      ],
+      "pos": [850, 120],
+      "size": [185, 90]
+    },
+    {
+      "id": "registry",
+      "type": "backend",
+      "label": "Honey batch contracts",
+      "sublabel": "Registry + role-based access",
+      "sources": [
+        { "path": "contracts/contracts/HoneyBatchRegistry.sol", "line": 10, "end_line": 85 },
+        { "path": "contracts/contracts/HoneyBatchRegistry.sol", "line": 97, "end_line": 236 },
+        { "path": "contracts/contracts/HoneyAccessControl.sol", "line": 10, "end_line": 45 }
+      ],
+      "pos": [1120, 120],
+      "size": [195, 90]
+    },
+    {
+      "id": "ponder-indexer",
+      "type": "backend",
+      "label": "Ponder indexer",
+      "sublabel": "Configured Registry event handlers",
+      "sources": [
+        { "path": "ponder/ponder.config.ts", "line": 5, "end_line": 20 },
+        { "path": "ponder/src/HoneyBatchRegistry.ts", "line": 4, "end_line": 45 }
+      ],
+      "pos": [1120, 320],
+      "size": [195, 90]
+    },
+    {
+      "id": "ponder-tables",
+      "type": "database",
+      "label": "Ponder event tables",
+      "sublabel": "Batch • lab test • recall projections",
+      "sources": [
+        { "path": "ponder/ponder.schema.ts", "line": 1, "end_line": 30 },
+        { "path": "ponder/src/HoneyBatchRegistry.ts", "line": 4, "end_line": 45 }
+      ],
+      "pos": [1120, 520],
+      "size": [195, 90]
+    }
+  ],
+  "boundaries": [
+    {
+      "kind": "region",
+      "label": "Untrusted browser execution",
+      "wraps": ["web-ui", "qr-crypto"],
+      "pad": 24
+    },
+    {
+      "kind": "region",
+      "label": "Arbitrum Sepolia trust domain",
+      "wraps": ["arbitrum", "registry"],
+      "pad": 24
+    },
+    {
+      "kind": "region",
+      "label": "Ponder indexing + projections",
+      "wraps": ["ponder-indexer", "ponder-tables"],
+      "pad": 24
+    }
+  ],
+  "connections": [
+    {
+      "id": "user-to-ui",
+      "from": "user",
+      "to": "web-ui",
+      "label": "HTTPS",
+      "variant": "emphasis"
+    },
+    {
+      "id": "ui-to-route",
+      "from": "web-ui",
+      "to": "next-routes",
+      "label": "trace request",
+      "variant": "emphasis"
+    },
+    {
+      "id": "ui-to-qr",
+      "from": "web-ui",
+      "to": "qr-crypto",
+      "label": "scan QR • verify file",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "route-to-auth",
+      "from": "next-routes",
+      "to": "supabase-auth",
+      "label": "helper unused",
+      "variant": "dashed"
+    },
+    {
+      "id": "route-to-db",
+      "from": "next-routes",
+      "to": "drizzle-postgres",
+      "label": "not queried",
+      "variant": "dashed"
+    },
+    {
+      "id": "web3-to-chain",
+      "from": "web3-adapter",
+      "to": "arbitrum",
+      "label": "HTTP JSON-RPC configured",
+      "variant": "dashed"
+    },
+    {
+      "id": "chain-to-registry",
+      "from": "arbitrum",
+      "to": "registry",
+      "label": "executes"
+    },
+    {
+      "id": "registry-to-indexer",
+      "from": "registry",
+      "to": "ponder-indexer",
+      "label": "3 events",
+      "fromSide": "bottom",
+      "toSide": "top"
+    },
+    {
+      "id": "indexer-to-tables",
+      "from": "ponder-indexer",
+      "to": "ponder-tables",
+      "label": "project fields",
+      "fromSide": "bottom",
+      "toSide": "top"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "amber",
+      "title": "QR traceability path",
+      "items": [
+        "QrCard encodes the current-domain /trace/{batchCode} URL.",
+        "Camera or image scan extracts the URL/code and navigates to that route.",
+        "The route resolves the code against SAMPLE_BATCHES; it does not query the chain."
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "On-chain vs off-chain",
+      "items": [
+        "Registry storage includes batch metadata hash, creator, time, weight, status, recall flag, parent IDs, and latest lab-document hash.",
+        "Contract events also carry lifecycle fields such as lab result/type, package lot hash/count, custody actors/location, and recall reason.",
+        "Ponder persists selected batch, lab-test, and recall event projections; the app PostgreSQL schema is defined but unused by current routes."
+      ]
+    },
+    {
+      "dot": "rose",
+      "title": "What is not wired today",
+      "items": [
+        "Dashboard create/recall actions change React state and the in-memory sample map; they do not submit contract transactions.",
+        "Viem/Wagmi, Supabase Auth helpers, and Drizzle are configured, but no current app route calls them.",
+        "Certificate hashing happens in the browser; no document upload/blob-storage call is implemented."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "10e3599a-4441-4619-9dd9-60088542f527",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "C:\\HONEYCHAIN\\docs\\.archify\\architecture-honeychain-20261008-2334\\candidate.json",
+  "output": "C:\\HONEYCHAIN\\docs\\.archify\\architecture-honeychain-20261008-2334\\honeychain-architecture.html",
+  "specification": {
+    "sha256": "d9491e55dccf5a242153321fbab2ff067c44b7d0b4a9b4a7287f844fb20a006a",
+    "bytes": 8680
+  },
+  "artifact": {
+    "sha256": "33cbd6c28ee2c931332893c97e1a4556fa21e4e583e81092b05d45b0ef56fe53",
+    "bytes": 773866
+  }
+}
