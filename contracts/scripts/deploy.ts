@@ -17,7 +17,12 @@ async function main() {
   await registry.waitForDeployment();
 
   const registryAddress = await registry.getAddress();
+  const deployTx = registry.deploymentTransaction();
   console.log("✅ HoneyBatchRegistry deployed to:", registryAddress);
+  if (deployTx) {
+    console.log("🔗 Deployment Tx Hash:", deployTx.hash);
+    console.log(`🔍 Arbiscan: https://sepolia.arbiscan.io/tx/${deployTx.hash}`);
+  }
 
   // 2. Grant roles to deployer for local testing
   const BEEKEEPER_ROLE = await registry.BEEKEEPER_ROLE();
@@ -44,6 +49,7 @@ async function main() {
     network: (await ethers.provider.getNetwork()).name,
     chainId: Number((await ethers.provider.getNetwork()).chainId),
     registryAddress,
+    transactionHash: deployTx?.hash || "",
     deployerAddress: deployer.address,
     deployedAt: new Date().toISOString(),
   };

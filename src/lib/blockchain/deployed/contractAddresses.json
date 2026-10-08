@@ -1,0 +1,8 @@
+{
+  "network": "arbitrumSepolia",
+  "chainId": 421614,
+  "registryAddress": "0xcf29656Cdcc7D94C3dbAD2eAf204e8FCA129e988",
+  "transactionHash": "0x92fa5371f6af3420845472f76c17ffefc6d284c8f26368e7966ecf7003b5ba1d",
+  "deployerAddress": "0xAd1758d04b1f9e16ee25fb6170BB7013121C0114",
+  "deployedAt": "2026-10-08T08:47:46.225Z"
+}
