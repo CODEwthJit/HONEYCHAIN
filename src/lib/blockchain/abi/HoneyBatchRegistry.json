@@ -1,0 +1,171 @@
+[
+  {
+    "inputs": [
+      { "internalType": "address", "name": "initialAdmin", "type": "address" }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true, "internalType": "bytes32", "name": "batchId", "type": "bytes32" },
+      { "indexed": true, "internalType": "address", "name": "beekeeper", "type": "address" },
+      { "indexed": false, "internalType": "uint32", "name": "initialWeightGrams", "type": "uint32" },
+      { "indexed": false, "internalType": "bytes32", "name": "metadataHash", "type": "bytes32" },
+      { "indexed": false, "internalType": "uint64", "name": "timestamp", "type": "uint64" }
+    ],
+    "name": "BatchCreated",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true, "internalType": "bytes32", "name": "batchId", "type": "bytes32" },
+      { "indexed": true, "internalType": "address", "name": "labAddress", "type": "address" },
+      { "indexed": false, "internalType": "bytes32", "name": "documentHash", "type": "bytes32" },
+      { "indexed": false, "internalType": "bool", "name": "passed", "type": "bool" },
+      { "indexed": false, "internalType": "string", "name": "testType", "type": "string" },
+      { "indexed": false, "internalType": "uint64", "name": "timestamp", "type": "uint64" }
+    ],
+    "name": "LabTestRecorded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true, "internalType": "bytes32", "name": "newBatchId", "type": "bytes32" },
+      { "indexed": false, "internalType": "bytes32[]", "name": "parentBatchIds", "type": "bytes32[]" },
+      { "indexed": true, "internalType": "address", "name": "processor", "type": "address" },
+      { "indexed": false, "internalType": "uint32", "name": "outputWeightGrams", "type": "uint32" },
+      { "indexed": false, "internalType": "uint64", "name": "timestamp", "type": "uint64" }
+    ],
+    "name": "BatchTransformed",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true, "internalType": "bytes32", "name": "batchId", "type": "bytes32" },
+      { "indexed": true, "internalType": "bytes32", "name": "lotNumberHash", "type": "bytes32" },
+      { "indexed": true, "internalType": "address", "name": "packager", "type": "address" },
+      { "indexed": false, "internalType": "uint32", "name": "unitCount", "type": "uint32" },
+      { "indexed": false, "internalType": "uint64", "name": "timestamp", "type": "uint64" }
+    ],
+    "name": "PackagingRecorded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true, "internalType": "bytes32", "name": "batchId", "type": "bytes32" },
+      { "indexed": true, "internalType": "address", "name": "fromActor", "type": "address" },
+      { "indexed": true, "internalType": "address", "name": "toActor", "type": "address" },
+      { "indexed": false, "internalType": "string", "name": "locationString", "type": "string" },
+      { "indexed": false, "internalType": "uint64", "name": "timestamp", "type": "uint64" }
+    ],
+    "name": "CustodyTransferred",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      { "indexed": true, "internalType": "bytes32", "name": "batchId", "type": "bytes32" },
+      { "indexed": true, "internalType": "address", "name": "recalledBy", "type": "address" },
+      { "indexed": false, "internalType": "string", "name": "reason", "type": "string" },
+      { "indexed": false, "internalType": "uint64", "name": "timestamp", "type": "uint64" }
+    ],
+    "name": "BatchRecalled",
+    "type": "event"
+  },
+  {
+    "inputs": [
+      { "internalType": "bytes32", "name": "batchId", "type": "bytes32" },
+      { "internalType": "uint32", "name": "initialWeightGrams", "type": "uint32" },
+      { "internalType": "bytes32", "name": "metadataHash", "type": "bytes32" }
+    ],
+    "name": "createBatch",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "bytes32", "name": "batchId", "type": "bytes32" },
+      { "internalType": "bytes32", "name": "documentHash", "type": "bytes32" },
+      { "internalType": "bool", "name": "passed", "type": "bool" },
+      { "internalType": "string", "name": "testType", "type": "string" }
+    ],
+    "name": "recordLabTest",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "bytes32", "name": "newBatchId", "type": "bytes32" },
+      { "internalType": "bytes32[]", "name": "parentBatchIds", "type": "bytes32[]" },
+      { "internalType": "uint32", "name": "outputWeightGrams", "type": "uint32" }
+    ],
+    "name": "recordTransformation",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "bytes32", "name": "batchId", "type": "bytes32" },
+      { "internalType": "bytes32", "name": "lotNumberHash", "type": "bytes32" },
+      { "internalType": "uint32", "name": "unitCount", "type": "uint32" }
+    ],
+    "name": "recordPackaging",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "bytes32", "name": "batchId", "type": "bytes32" },
+      { "internalType": "address", "name": "toActor", "type": "address" },
+      { "internalType": "string", "name": "locationString", "type": "string" }
+    ],
+    "name": "recordCustodyTransfer",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "bytes32", "name": "batchId", "type": "bytes32" },
+      { "internalType": "string", "name": "reason", "type": "string" }
+    ],
+    "name": "recallBatch",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "bytes32", "name": "batchId", "type": "bytes32" }
+    ],
+    "name": "getBatch",
+    "outputs": [
+      {
+        "components": [
+          { "internalType": "bytes32", "name": "batchId", "type": "bytes32" },
+          { "internalType": "bytes32", "name": "metadataHash", "type": "bytes32" },
+          { "internalType": "address", "name": "creator", "type": "address" },
+          { "internalType": "uint64", "name": "createdAt", "type": "uint64" },
+          { "internalType": "uint32", "name": "currentWeightGrams", "type": "uint32" },
+          { "internalType": "uint8", "name": "status", "type": "uint8" },
+          { "internalType": "bool", "name": "isRecalled", "type": "bool" }
+        ],
+        "internalType": "struct HoneyBatchRegistry.Batch",
+        "name": "",
+        "type": "tuple"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]

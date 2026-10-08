@@ -1,0 +1,43 @@
+name: HoneyChain CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 12
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+
+      - name: Install Dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run Cryptographic & Unit Tests
+        run: pnpm test
+
+      - name: Verify Next.js Production Build
+        run: pnpm build
+        env:
+          NEXT_PUBLIC_APP_URL: "http://localhost:3000"
+          NEXT_PUBLIC_SUPABASE_URL: "https://honeychain-demo.supabase.co"
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: "dummy_anon_key"
+          DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/honeychain"
+          NEXT_PUBLIC_CHAIN_ID: "421614"
+          NEXT_PUBLIC_ARBITRUM_SEPOLIA_RPC_URL: "https://sepolia-rollup.arbitrum.io/rpc"
+          NEXT_PUBLIC_REGISTRY_CONTRACT_ADDRESS: "0x1234567890123456789012345678901234567890"
+          NEXT_PUBLIC_ACCESS_CONTROL_CONTRACT_ADDRESS: "0x0987654321098765432109876543210987654321"
